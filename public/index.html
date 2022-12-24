@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<head>
+	<title>TickiT</title>
+	<link rel="stylesheet" href="./styles/style.css" />
+	<link rel="icon" type="image/x-icon" href="./assets/favicon.png" />
+</head>
+<body>
+	<section class="login" id="login-window">
+		<div class="login-container">
+			<h2>Login</h2>
+			<form id="login-form" action="\login" class="login-form" method="post">
+				<label class="input-label" for="username">Username</label>
+				<input
+					type="text"
+					name="username"
+					placeholder="Username"
+					id="username"
+					required
+				/>
+				<label class="input-label" for="password">Password</label>
+				<input
+					id="password"
+					type="password"
+					name="password"
+					placeholder="*********"
+					minlength="8"
+					maxlength="20"
+					required
+				/>
+				<button type="submit">Login</button>
+			</form>
+			<button
+				type="button"
+				class="signup-redirect-button"
+				id="signup-redirect-button"
+			>
+				Sign Up
+			</button>
+		</div>
+	</section>
+	<section class="register inactive" id="register-window">
+		<div class="login-container">
+			<h2>Sign Up</h2>
+			<form id="register-form" action="/register" class="login-form">
+				<label class="input-label" for="username">Username</label>
+				<input
+					type="text"
+					name="username"
+					placeholder="Username"
+					id="new-username"
+					required
+				/>
+				<label class="input-label" for="password">Password</label>
+				<input
+					id="new-password"
+					type="password"
+					name="password"
+					placeholder="*********"
+					minlength="8"
+					maxlength="20"
+					required
+				/>
+				<label class="input-label" for="confirm-password"
+					>Confirm Password</label
+				>
+				<input
+					id="confirm-password"
+					type="password"
+					name="confirm-password"
+					placeholder="*********"
+					minlength="8"
+					maxlength="20"
+					required
+				/>
+				<button type="submit">Register</button>
+			</form>
+			<button
+				type="submit"
+				class="login-redirect-button"
+				id="login-redirect-button"
+			>
+				Login
+			</button>
+		</div>
+	</section>
+	<section class="user-home-page inactive" id="user-home-page">
+		<div class="user-home-window" id="user-home-window">
+			<div class="user-action-container" id="user-action-container">
+				<div class="logo"><h1>TickiT</h1></div>
+				<select id="filter-options" class="user-actions">
+					<option value="all" selected>All</option>
+					<option value="closed">Closed</option>
+					<option value="open">Open</option>
+				</select>
+				<button id="raise-ticket-button" class="user-actions">
+					Raise Ticket
+				</button>
+				<div class="user-logout">
+					<h2 id="current-user" class="current-user"></h2>
+					<button id="logout-button">
+						<img class="logout-icon" src="./assets/logout.webp" />
+					</button>
+				</div>
+			</div>
+			<div class="user-page-body-container">
+				<div class="ticket-container" id="ticket-container"></div>
+			</div>
+		</div>
+	</section>
+	<section class="raise-ticket-window inactive" id="raise-ticket-window">
+		<div class="raise-ticket">
+			<div class="raise-ticket-header">
+				<h2>Raise Ticket</h2>
+				<button type="button" id="close-raise-window">X</button>
+			</div>
+			<form
+				id="raise-ticket-form"
+				action="/sendmail"
+				class="raise-ticket-form"
+				method="post"
+			>
+				<div class="input-field">
+					<label class="input-label" for="name">Name</label>
+					<input type="text" name="name" id="name" disabled required />
+				</div>
+				<div class="input-field">
+					<label class="input-label" for="priority">Priority</label>
+					<select id="priority" type="text" name="priority" required>
+						<option value="High">High</option>
+						<option value="Medium">Medium</option>
+						<option value="Low" selected>Low</option>
+					</select>
+				</div>
+				<div class="input-field">
+					<label class="input-label" for="urgency">Urgency</label>
+					<select id="urgency" type="text" name="urgency" required>
+						<option value="Highly urgent">Highly Urgent</option>
+						<option value="Less urgent" selected>Less Urgent</option>
+					</select>
+				</div>
+				<div class="input-field">
+					<label class="input-label" for="subject">Subject</label>
+					<input
+						id="subject"
+						type="text"
+						name="subject"
+						maxlength="25"
+						placeholder="Subject"
+						required
+					/>
+				</div>
+				<textarea
+					id="description"
+					name="description"
+					placeholder="Description"
+					rows="10"
+					cols="20"
+					required
+				></textarea>
+				<button type="submit" id="submit-button">Submit</button>
+			</form>
+		</div>
+	</section>
+	<section class="raise-ticket-window inactive" id="view-ticket-window">
+		<div class="raise-ticket">
+			<div class="raise-ticket-header">
+				<h2>View Ticket</h2>
+				<button type="button" id="close-view-window">X</button>
+			</div>
+			<form id="view-ticket-form" class="raise-ticket-form">
+				<div class="input-field">
+					<label class="input-label" for="view-name">Name</label>
+					<input type="text" name="view-name" id="view-name" disabled />
+				</div>
+				<div class="input-field">
+					<label class="input-label" for="view-priority">Priority</label>
+					<select id="view-priority" type="text" name="view-priority" disabled>
+						<option value="High">High</option>
+						<option value="Medium">Medium</option>
+						<option value="Low" selected>Low</option>
+					</select>
+				</div>
+				<div class="input-field">
+					<label class="input-label" for="view-urgency">Urgency</label>
+					<select id="view-urgency" type="text" name="view-urgency" disabled>
+						<option value="Highly urgent">Highly Urgent</option>
+						<option value="Less urgent" selected>Less Urgent</option>
+					</select>
+				</div>
+				<div class="input-field">
+					<label class="input-label" for="view-subject">Subject</label>
+					<input
+						id="view-subject"
+						type="text"
+						name="view-subject"
+						maxlength="25"
+						disabled
+					/>
+				</div>
+				<textarea
+					id="view-description"
+					name="view-description"
+					placeholder="Description"
+					rows="10"
+					cols="20"
+					disabled
+				></textarea>
+				<div class="status-buttons">
+					<button id="close-ticket-button" class="inactive">
+						Close Ticket
+					</button>
+					<button id="open-ticket-button" class="inactive">Open Ticket</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	<section class="admin-home-page inactive" id="admin-home-page">
+		<div class="user-home-window" id="user-home-window">
+			<div class="user-action-container" id="user-action-container">
+				<div class="admin-logo"><h1>TickiT</h1></div>
+				<label for="filter-options">Status</label>
+				<select id="filter-by-status" class="user-actions">
+					<option value="all" selected>All</option>
+					<option value="closed">Closed</option>
+					<option value="open">Open</option>
+				</select>
+				<label for="filter-by-priority">Priority</label>
+				<select id="filter-by-priority" class="user-actions">
+					<option value="all" selected>All</option>
+					<option value="High">High</option>
+					<option value="Medium">Medium</option>
+					<option value="Low">Low</option>
+				</select>
+				<label for="filter-by-urgency">Urgency</label>
+				<select id="filter-by-urgency" class="user-actions">
+					<option value="all" selected>All</option>
+					<option value="Highly urgent">Highly Urgent</option>
+					<option value="Less urgent">Less Urgent</option>
+				</select>
+				<label for="filter-by-month">Month</label>
+				<select id="filter-by-month" class="user-actions">
+					<option value="all" selected>All</option>
+					<option value="0">Jan</option>
+					<option value="1">Feb</option>
+					<option value="2">Mar</option>
+					<option value="3">Apr</option>
+					<option value="4">May</option>
+					<option value="5">Jun</option>
+					<option value="6">Jul</option>
+					<option value="7">Aug</option>
+					<option value="8">Sep</option>
+					<option value="9">Oct</option>
+					<option value="10">Nov</option>
+					<option value="11">Dec</option>
+				</select>
+				<div class="admin-logout">
+					<h2 class="current-user">admin</h2>
+					<button id="admin-logout-button">
+						<img class="logout-icon" src="./assets/logout.webp" />
+					</button>
+				</div>
+			</div>
+			<div class="admin-page-body-container">
+				<div class="ticket-container" id="admin-ticket-container"></div>
+				<div class="stats-container">
+					<div class="stat">
+						<h3>Total Tickets</h3>
+						<p id="total-tickets"></p>
+					</div>
+					<div class="stat">
+						<h3>Closed Tickets</h3>
+						<p id="closed-tickets"></p>
+					</div>
+					<div class="stat">
+						<h3>Open Tickets</h3>
+						<p id="open-tickets"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="./scripts/utility.js"></script>
+	<script src="./scripts/index.js"></script>
+</body>
